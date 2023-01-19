@@ -1,0 +1,138 @@
+
+		Assignment 2
+
+1. Display all the Supplier names with the initial letter capital.
+ans. Select CONCAT(UPPER(SUBSTRING(sname,1,1)),LOWER(SUBSTRING(sname,2))) AS Sname from supplier;
+
+2. Display the Part Table in the ascending order of CITY and within the city in 
+the ascending order of Part names
+ans. select * from parts where order by city, pname;
+
+3. Display all the Suppliers with a status between 10 and 20
+ans.  select * from supplier where status between 10 and 20;
+ 
+4. Display all the Parts and their Weight, which are not in the range of 10 and 15.
+ans. select * from parts where weight not between 10 and 15;
+
+
+5. Display all the Part names starting with the letter ‘S’. 
+ANS. select pname from parts where pname like"S%";
+
+6. Display all the Suppliers, belonging to cities starting with the letter ‘L’.
+ANS. select sname from supplier where sname like"L%";
+
+7. Display all the Projects, with the third letter in JNAME as ‘n’. 
+ans. select jname from projects where jname like"___n%"
+
+		Assignment 3
+select  concat(upper(substr(Sname,1,1)),lower(substr(Sname,2))) from supplier;
+
+select upper(Sname) from supplier;
+
+select lower(Sname) from supplier;
+
+select lpad(Sname,25,' ') from supplier;
+
+select replace(Sname, 'l','o') lo from supplier;
+
+select replace(Sname, 'l','o') lo, replace(Sname, 'a','o') ao from supplier;
+
+select Sname , length(Sname) from supplier;
+
+select Sname from supplier where soundex(Sname) = soundex("Bleko");
+
+select 
+case
+when Status = 10 then "Ten"
+when Status = 20 then "Twenty"
+when Status = 30 then "Thirty"
+end
+as status
+from supplier order by Status;
+
+select dayname(sysdate());
+
+			ASSIGNMENT 4
+select min(Status) from supplier;
+
+select max(Weight) from parts;
+
+select avg(Weight) from parts;
+
+select `P#`, Qty from supplier_parts_project where `P#` = "P1";
+
+select `P#`, Qty from supplier_parts_project; 
+
+select `P#`, avg(Qty) from supplier_parts_project group by `P#`;
+
+
+7. select max(Qty) from supplier_parts_project where Qty > 800;
+
+8. Display the Status and the count of Suppliers with that Status.
+ans. select status count(*) from supplier group by status;
+
+9. Display the count of Projects going on in different cities. 
+ans. select city, count(*) from projects group by city;
+
+10. What is the difference between COUNT(Status) and COUNT(*) 
+ans. select count(status), count(*) from supplier;
+if we use count of status it will only count those values which is not null.
+
+11. Display the Status and the Count of Suppliers with that Status in the following format 
+as shown below:- 
+ans. select 
+	case
+	when status="Ten" then "1"
+	when status="Twenty" then "2"
+	when status="Thirty" then "3"
+	end as status
+	from supplier;
+
+
+		ASSIGNMENT 5
+
+1. Display the Supplier name and the Quantity sold. 
+ANS. select Sname, Qty from supplier_parts_project a,supplier b where a.`S#` = b.`S#`;
+
+
+2. Display the Part name and Quantity sold. 
+ans. select pname, Qty from supplier_parts_project a,parts b where a.`P#` = b.`P#`;
+
+3. Display the Project name and Quantity sold
+ans. select jname, Qty from supplier_parts_project a,projects b where a.`J#` = b.`J#`;
+
+ 
+4. Display the Supplier name, Part name, Project name and Quantity sold
+ans. select sname, pname, jname, c.Qty from supplier a, parts b,supplier_parts_project c, projects d where a.`S#` = c.`S#` and b.`P#` = c.`P#` and d.`J#` = c.`J#;
+
+5. Display the Supplier name, Supplying Parts to a Project in the same City. 
+ans. select sname , pname from supplier a, parts b, projects c where a.city=c.city and b.city=c.city;
+
+
+ 
+6. Display the Part name that is ‘Red’ is color, and the Quantity sold. 
+ans. select pname , Qty from parts a, supplier_parts_project b where a.`P#`=b.`P#` and color="Red";
+
+
+7. Display all the Quantity sold by Suppliers with the Status = 20. 
+ans. select Qty from supplier_parts_project a, supplier b where a.`S#`=b.`S#` and status =20;
+
+8. Display all the Parts and Quantity with a Weight > 14. 
+ans. select pname , Qty from supplier_parts_project a, Parts b where a.`P#`=b.`P#` and b.weight > 14 ;
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+

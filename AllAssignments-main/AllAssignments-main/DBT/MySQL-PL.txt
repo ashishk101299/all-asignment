@@ -1,0 +1,157 @@
+1. Write a program that computes the perimeter and the area of a rectangle. Define 
+   your own values for the length and width. (Assuming that L and W are the length 
+   and width of the rectangle, Perimeter = 2*(L+W) and Area = L*W.
+
+
+create table Ans (What char(10), Ans char(10));
+
+delimiter $
+create procedure calc(Ty char(10))
+begin 
+	declare length int default 15;
+    declare width int default 12;
+    case 
+    when Ty = 'A' then
+		insert into Ans values("Area", length * width);
+	when Ty = 'P' then
+		insert into Ans values("Perimeter", 2*(length+width));
+	else
+		begin
+        end;
+    end case;
+    
+end $
+delimiter ;
+
+drop procedure calc ;
+
+select * from Ans;
+
+call calc('P');
+
+
+ 
+2. Write a program that declares an integer variable called num, assigns a value to it, 
+   and computes and inserts into the tempp table the value of the variable itself, its 
+   square, and its cube.
+
+create table temp(num int, square int,cub int);
+
+delimiter $
+create procedure pro()
+begin 
+	declare x int default 7;
+    declare y int default pow(x,2);
+    declare z int default pow(x,3);
+    insert into temp values(x, y, z);
+end $
+delimiter ;
+
+call pro();
+
+select * from temp;
+
+3. Convert a temperature in Fahrenheit (F) to its equivalent in Celsius (C) and vice 
+   versa. The required formulae are:- C= (F-32)*5/9 
+
+F= 9/5*C + 32
+create table temp(Celcius int, Fahrenheit int);
+
+delimiter $
+create procedure calc(x int,z char(10))
+begin 
+	declare y int;
+    case 
+    when z = 'F' then
+		set y = (x-32)*5/9;
+		insert into temp values(y, x);
+	when z = 'C' then
+		set y = 9/5*x + 32;
+		insert into temp values(x, y);
+	else
+		begin
+        end;
+    end case;
+end $
+delimiter ;
+
+drop procedure calc ;
+
+call calc(12, 'C');
+
+select * from temp;
+
+4. Convert a number of inches into yards, feet, and inches. For example, 124 inches 
+   equals 3 yards, 1 foot, and 4 inches.
+
+create table temp(inch double,yard double,foot double);
+drop table temp;
+drop procedure calc;
+
+delimiter $
+create procedure calc(x double)
+begin 
+	declare yard double default round(x/36, 3);
+    declare foot double default round(x/12, 3);
+	
+    insert into temp values (x, yard, foot);
+end $
+delimiter ;
+
+call calc(1);
+
+select * from temp;
+
+
+5. Write a program that enables a user to input an integer. The program should then 
+   state whether the integer is evenly divisible by 5.
+
+create table temp(x int, EvenDivisibility char(25));
+drop table temp;
+drop procedure calc;
+
+delimiter $
+create procedure calc(x int)
+begin 
+	if x%5 =0 then
+
+		if x%2 =0 then
+			insert into temp values(x, ' Divisible');
+		else
+			insert into temp values(x, 'Not Divisible');
+		end if;
+	else
+		insert into temp values(x, 'Not Divisible');
+    end if;
+end $
+delimiter ;
+
+call calc(10);
+
+select * from temp;
+
+ 
+6. Your block should read in two real numbers and tell whether the product of the two 
+   numbers is equal to or greater than 100. 
+
+create table temp(define char(25));
+drop table temp;
+drop procedure calc;
+
+delimiter $
+create procedure calc(x float, y float)
+begin 
+	declare z float default x * Y;
+    if z>100 then 
+		insert into temp values('greater');
+	elseif z<100 then
+		insert into temp values('lesser');
+	else
+		insert into temp values('equal');
+end if;
+end ; $
+delimiter ;
+
+call calc(30, 5);
+
+select * from temp;

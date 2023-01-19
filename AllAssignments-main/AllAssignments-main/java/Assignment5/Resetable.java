@@ -1,0 +1,3 @@
+interface Resetable {
+	void Reset();
+}
